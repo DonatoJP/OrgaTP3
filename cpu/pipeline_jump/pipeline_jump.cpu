@@ -60,7 +60,8 @@
 		"MuxMem":     {"type": "Multiplexer", "latency": 15, "x": 715, "y": 270, "size": 32, "sel": "MemToReg", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the result of the ALU or the value read from memory to write to the destination register (WriteData).", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
 		"ForkRegWR2": {"type": "Fork", "x": 710, "y": 125, "size": 1, "in": "In", "out": ["Out1", "Out2"]},
 		"ForkDst2":   {"type": "Fork", "x": 705, "y": 440, "size": 5, "in": "In", "out": ["Out1", "Out2"]},
-		"ForkMemR1":  {"type": "Fork", "x": 416, "y": 480, "size": 32, "in": "In", "out": ["Out1", "Out2"]}
+		"ForkMemR1":  {"type": "Fork", "x": 416, "y": 480, "size": 32, "in": "In", "out": ["Out1", "Out2"]},
+		"ConcatJump": {"type": "Concatenator", "x": 510, "y": 90, "in1": {"id": "Target", "size": 4}, "in2": {"id": "In2", "size": 26}, "out": "Out", "desc": {"default": "Concatena los 4 bits mas significativos de PC+4 al target, obteniendose la dirección a la cual se va a saltar.", "pt": "."}}
 	},
 	"wires": [
 		{"from": "PC", "out": "PC", "to": "ForkPC", "in": "In"},
