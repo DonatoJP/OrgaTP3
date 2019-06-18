@@ -198,7 +198,7 @@
 
 
 
-		{"from": "DistInst", "out": "25-0", "to": "ID/EX", "in": "25-0", "start": {"x": 205, "y": 258}, "end": {"x": 390, "y": 115}},
+		{"from": "DistInst", "out": "25-0", "to": "ID/EX", "in": "25-0", "start": {"x": 205, "y": 258}, "end": {"x": 390, "y": 115}, "points": [{"x": 206, "y": 258}, {"x": 206, "y": 200}, {"x": 370, "y": 200}, {"x": 370, "y": 115}]},
 		{"from": "Control", "out": "Jump", "to": "ID/EX", "in": "Jump", "start": {"x": 290, "y": 120}, "end": {"x": 390, "y": 120}},
 		{"from": "ID/EX", "out": "25-0", "to": "ShiftJump", "in": "In", "start": {"x": 405, "y": 115}, "end": {"x": 440, "y": 90}},
 		{"from": "ShiftJump", "out": "Out", "to": "ConcatJump", "in": "Target", "start": {"x": 440, "y": 90}, "end": {"x": 510, "y": 90}},
