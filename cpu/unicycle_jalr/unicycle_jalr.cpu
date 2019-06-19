@@ -33,7 +33,7 @@
 
 		"MuxPCJalr":     	{"type": "Multiplexer", "latency": 15, "x": 90, "y": 350, "size": 32, "sel": "MemToReg", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the result of the ALU or the value read from memory to write to the destination register (WriteData).", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
 		"MuxWriteJalr":     {"type": "Multiplexer", "latency": 15, "x": 90, "y": 400, "size": 32, "sel": "MemToReg", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the result of the ALU or the value read from memory to write to the destination register (WriteData).", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
-		"ForkPC+4":     		{"type": "Fork", "x": 200, "y": 70, "size": 32, "in": "In", "out": ["Out1", "Out2"]},
+		"ForkPC+4":     		{"type": "Fork", "x": 200, "y": 75, "size": 32, "in": "In", "out": ["Out1", "Out2"]},
 		"ForkResult":     		{"type": "Fork", "x": 140, "y": 400, "size": 32, "in": "In", "out": ["Out1", "Out2"]}
 	},
 	"wires": [
@@ -59,7 +59,6 @@
 		{"from": "ExtendImm", "out": "Out", "to": "ForkImm", "in": "In", "points": [{"x": 340, "y": 350}]},
 		{"from": "ForkImm", "out": "Out1", "to": "MuxReg", "in": "1"},
 		{"from": "DistInst", "out": "25-0", "to": "ShiftJump", "in": "In", "start": {"x": 182, "y": 250}, "points": [{"x": 182, "y": 40}]},
-		{"from": "PCAdder", "out": "PC+4", "to": "DistPC", "in": "In"},
 		{"from": "DistPC", "out": "31-28", "to": "ConcatJump", "in": "In1", "start": {"x": 255, "y": 67}, "points": [{"x": 280, "y": 67}]},
 		{"from": "ShiftJump", "out": "Out", "to": "ConcatJump", "in": "In2"},
 		{"from": "DistPC", "out": "31-0", "to": "ForkBranch", "in": "In", "start": {"x": 255, "y": 83}, "points": [{"x": 320, "y": 83}]},
@@ -93,7 +92,10 @@
 		{"from": "MuxMem", "out": "Out", "to": "ForkResult", "in": "In", "points": [{"x": 600, "y": 287}, {"x": 600, "y": 400}, {"x": 240, "y": 400}]},
 		{"from": "ForkResult", "out": "Out1", "to": "MuxPCJalr", "in": "1"},
 		{"from": "ForkResult", "out": "Out2", "to": "MuxWriteJalr", "in": "0"},
-		{"from": "MuxWriteJalr", "out": "Out", "to": "RegBank", "in": "WriteData", "end":{"x":250 , "y": 300} }
+		{"from": "MuxWriteJalr", "out": "Out", "to": "RegBank", "in": "WriteData", "end":{"x":250 , "y": 300} },
+		{"from": "PCAdder", "out": "PC+4", "to": "ForkPC+4", "in": "In"},
+		{"from": "ForkPC+4", "out": "Out1", "to": "DistPC", "in": "In"},
+		{"from": "ForkPC+4", "out": "Out2", "to": "MuxWriteJalr", "in": "1"}
 	],
 	"reg_names": ["zero", "at", "v0", "v1", "a0", "a1", "a2", "a3", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra"],
 	"instructions": "unicycle_jalr.set"
