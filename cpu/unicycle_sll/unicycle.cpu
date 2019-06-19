@@ -32,7 +32,7 @@
 
 
 		"MuxShamt":   {"type": "Multiplexer", "latency": 15, "x": 382, "y": 270, "size": 32, "sel": "SHAMTSrc", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selecciona el shamt de la instruccion", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
-		"ExtendShamt":  {"type": "SignExtend", "x": 400, "y": 190, "in": {"id": "In", "size": 5}, "out": {"id": "Out", "size": 32}, "desc": {"default": "Extends the instruction's immediate value from 16 to 32 bits, in the case it is an I-type instruction.", "pt": "Estende o valor imediato da instrução de 16 para 32 bits, no caso de ser uma instrução do tipo I."}}
+		"ExtendShamt":  {"type": "SignExtend", "x": 195, "y": 308, "in": {"id": "In", "size": 5}, "out": {"id": "Out", "size": 32}, "desc": {"default": "Extends the instruction's immediate value from 16 to 32 bits, in the case it is an I-type instruction.", "pt": "Estende o valor imediato da instrução de 16 para 32 bits, no caso de ser uma instrução do tipo I."}}
 	},
 	"wires": [
 		{"from": "PC", "out": "PC", "to": "ForkPC", "in": "In"},
@@ -90,11 +90,11 @@
 
 
 		{"from": "Control", "out": "SHAMTSrc", "to": "MuxShamt", "in": "SHAMTSrc", "start": {"x": 280, "y": 205}, "points": [{"x": 389, "y": 205}]},
-		{"from": "MuxShamt", "out": "Out", "to": "ALU", "in": "In2"},
-		{"from": "MuxReg", "out": "Out", "to": "MuxShamt", "in": "0", "end": {"x": 400, "y": 287}},
+		{"from": "MuxShamt", "out": "Out", "to": "ALU", "in": "In2", "end": {"x": 400, "y": 287}},
+		{"from": "MuxReg", "out": "Out", "to": "MuxShamt", "in": "0", "end": {"x": 382, "y": 287}},
 		{"from": "RegBank", "out": "ReadData1", "to": "ALU", "in": "In1", "end": {"x": 400, "y": 248}},
-		{"from": "DistInst", "out": "10-6", "to": "ExtendShamt", "in": "In"},
-		{"from": "ExtendShamt", "out": "Out", "to": "MuxShamt", "in": "1"}
+		{"from": "DistInst", "out": "10-6", "to": "ExtendShamt", "in": "In", "points": [{"x": 192, "y": 253}, {"x": 192, "y": 328}]},
+		{"from": "ExtendShamt", "out": "Out", "to": "MuxShamt", "in": "1","end": {"x": 382, "y": 275} ,"points": [{"x": 377, "y": 328}, {"x": 377, "y": 275}]}
 
 	],
 	"reg_names": ["zero", "at", "v0", "v1", "a0", "a1", "a2", "a3", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra"],
