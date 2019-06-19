@@ -60,8 +60,12 @@
 		"MuxMem":     {"type": "Multiplexer", "latency": 15, "x": 715, "y": 270, "size": 32, "sel": "MemToReg", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the result of the ALU or the value read from memory to write to the destination register (WriteData).", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
 		"ForkRegWR2": {"type": "Fork", "x": 710, "y": 125, "size": 1, "in": "In", "out": ["Out1", "Out2"]},
 		"ForkDst2":   {"type": "Fork", "x": 705, "y": 440, "size": 5, "in": "In", "out": ["Out1", "Out2"]},
-		"ForkMemR1":  {"type": "Fork", "x": 416, "y": 480, "size": 32, "in": "In", "out": ["Out1", "Out2"]}
-	},
+		"ForkMemR1":  {"type": "Fork", "x": 416, "y": 480, "size": 32, "in": "In", "out": ["Out1", "Out2"]},
+
+
+
+        "ExtendShamt":   {"type": "ShiftLeft", "x": 300, "y": 400, "in": {"id": "In", "size": 5}, "out": {"id": "Out", "size": 32}, "amount": 0, "desc": {"default": "Para extender el shamt a 32 bit", "pt": "Os 2 bits menos significativos dos endereços das instruções são sempre 00 (os endereços são múltiplos de 4). Como tal, estes bits não são incluídos no valor imediato da instrução (offset).\nEste componente restaura esses bits deslocando o valor 2 bits para a esquerda (ou multiplicando por 4), no caso de ser uma instrução de branch."}}
+    },
 	"wires": [
 		{"from": "PC", "out": "PC", "to": "ForkPC", "in": "In"},
 		{"from": "ForkPC", "out": "Out1", "to": "InstMem", "in": "Address"},
