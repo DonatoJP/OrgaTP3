@@ -32,7 +32,7 @@
 
 
 		"MuxShamt":   {"type": "Multiplexer", "latency": 15, "x": 382, "y": 270, "size": 32, "sel": "SHAMTSrc", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selecciona el shamt de la instruccion", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
-		"ExtendShamt":  {"type": "SignExtend", "x": 195, "y": 308, "in": {"id": "In", "size": 5}, "out": {"id": "Out", "size": 32}, "desc": {"default": "Extends the instruction's immediate value from 16 to 32 bits, in the case it is an I-type instruction.", "pt": "Estende o valor imediato da instrução de 16 para 32 bits, no caso de ser uma instrução do tipo I."}}
+		"ExtendShamt":  {"type": "ShiftLeft", "x": 195, "y": 308, "in": {"id": "In", "size": 5}, "out": {"id": "Out", "size": 32}, "amount": 0, "desc": {"default": "The 2 less significant bits of the addresses of the instructions are always 00 (the addresses are multiples of 4). As such, these bits are not included in the instruction's target field.\nThis component restores those bits by shifting the target 2 bits to the left (or multiplying by 4), in case it is a jump instruction.", "pt": "Os 2 bits menos significativos dos endereços das instruções são sempre 00 (os endereços são múltiplos de 4). Como tal, estes bits não são incluídos no campo alvo da instrução.\nEste componente restaura esses bits deslocando o alvo 2 bits para a esquerda (ou multiplicando por 4), no caso de ser uma instrução de salto."}}
 	},
 	"wires": [
 		{"from": "PC", "out": "PC", "to": "ForkPC", "in": "In"},
