@@ -194,7 +194,8 @@
 		{"from": "ForkRegWR2", "out": "Out2", "to": "ForwardingUnit", "in": "MEM/WB.RegWrite", "points": [{"x": 710, "y": 450}]},
 
 
-		{"from": "Control", "out": "SHAMTSrc", "to": "ID/EX", "in": "SHAMTSrc", "start": {"x": 290, "y": 120}, "end": {"x": 390, "y": 120}}
+		{"from": "Control", "out": "SHAMTSrc", "to": "ID/EX", "in": "SHAMTSrc", "start": {"x": 290, "y": 120}, "end": {"x": 390, "y": 120}},
+		{"from": "DistInst", "out": "10-6", "to": "ExtendShamt", "in": "In", "start": {"x": 203, "y": 280}, "end": {"x": 300, "y": 420}, "points": [{"x": 203, "y": 420}]}
 	],
 	"reg_names": ["zero", "at", "v0", "v1", "a0", "a1", "a2", "a3", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra"],
 	"instructions": "pipeline_srl.set"
