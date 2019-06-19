@@ -33,7 +33,8 @@
 
 		"MuxPCJalr":     	{"type": "Multiplexer", "latency": 15, "x": 90, "y": 350, "size": 32, "sel": "MemToReg", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the result of the ALU or the value read from memory to write to the destination register (WriteData).", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
 		"MuxWriteJalr":     {"type": "Multiplexer", "latency": 15, "x": 90, "y": 400, "size": 32, "sel": "MemToReg", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the result of the ALU or the value read from memory to write to the destination register (WriteData).", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
-		"ForkPC+4":     		{"type": "Fork", "x": 200, "y": 70, "size": 32, "in": "In", "out": ["Out1", "Out2"]}
+		"ForkPC+4":     		{"type": "Fork", "x": 200, "y": 70, "size": 32, "in": "In", "out": ["Out1", "Out2"]},
+		"ForkResult":     		{"type": "Fork", "x": 120, "y": 410, "size": 32, "in": "In", "out": ["Out1", "Out2"]}
 	},
 	"wires": [
 		{"from": "PC", "out": "PC", "to": "ForkPC", "in": "In"},
