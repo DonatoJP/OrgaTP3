@@ -199,7 +199,8 @@
 		{"from": "ExtendShamt", "out": "Out", "to": "ID/EX", "in": "Shamt", "start": {"x": 340, "y": 420}, "end": {"x": 390, "y": 398}, "points": [{"x": 370, "y": 420}, {"x": 370, "y": 398}]},
 
 		{"from": "ID/EX", "out": "Shamt", "to": "MuxShamt", "in": "1", "start": {"x": 400, "y": 398}, "end": {"x": 520, "y": 350}, "points": [{"x": 512, "y": 398}, {"x": 512, "y": 350}] },
-		{"from": "MuxReg", "out": "Out", "to": "MuxShamt", "in": "0", "start": {"x": 470, "y": 292}, "end": {"x": 520, "y": 325}, "points": [{"x": 472, "y": 292}, {"x": 472, "y": 325}]}
+		{"from": "MuxReg", "out": "Out", "to": "MuxShamt", "in": "0", "start": {"x": 470, "y": 292}, "end": {"x": 520, "y": 325}, "points": [{"x": 472, "y": 292}, {"x": 472, "y": 325}]},
+		{"from": "MuxShamt", "out": "Out", "to": "ALU", "in": "In2", "start": {"x": 530, "y": 335}, "points": [{"x": 540, "y": 335}, {"x": 540, "y": 315}, {"x": 475, "y": 315}, {"x": 475, "y": 277}]}
 	],
 	"reg_names": ["zero", "at", "v0", "v1", "a0", "a1", "a2", "a3", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra"],
 	"instructions": "pipeline_srl.set"
