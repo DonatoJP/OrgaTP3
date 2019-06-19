@@ -65,7 +65,7 @@
 
 
         "ExtendShamt":   {"type": "ShiftLeft", "x": 300, "y": 400, "in": {"id": "In", "size": 5}, "out": {"id": "Out", "size": 32}, "amount": 0, "desc": {"default": "Para extender el shamt a 32 bit", "pt": "Os 2 bits menos significativos dos endereços das instruções são sempre 00 (os endereços são múltiplos de 4). Como tal, estes bits não são incluídos no valor imediato da instrução (offset).\nEste componente restaura esses bits deslocando o valor 2 bits para a esquerda (ou multiplicando por 4), no caso de ser uma instrução de branch."}},
-        "MuxShamt":     {"type": "Multiplexer", "latency": 15, "x": 520, "y": 320, "size": 5, "sel": "RegDst", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the instruction's rt or rd field as the destination register (WriteReg).", "pt": "Selecciona o campo rt ou rd da instrução como registo de destino (WriteReg)."}}
+        "MuxShamt":     {"type": "Multiplexer", "latency": 15, "x": 520, "y": 320, "size": 32, "sel": "RegDst", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selecciona entre un registro o el shamt para usar en la alu", "pt": "Selecciona o campo rt ou rd da instrução como registo de destino (WriteReg)."}}
     },
 	"wires": [
 		{"from": "PC", "out": "PC", "to": "ForkPC", "in": "In"},
@@ -197,7 +197,9 @@
 
 		{"from": "Control", "out": "SHAMTSrc", "to": "ID/EX", "in": "SHAMTSrc", "start": {"x": 290, "y": 120}, "end": {"x": 390, "y": 120}},
 		{"from": "DistInst", "out": "10-6", "to": "ExtendShamt", "in": "In", "start": {"x": 203, "y": 280}, "end": {"x": 300, "y": 420}, "points": [{"x": 203, "y": 420}]},
-		{"from": "ExtendShamt", "out": "Out", "to": "ID/EX", "in": "Shamt", "start": {"x": 340, "y": 420}, "end": {"x": 390, "y": 400}, "points": [{"x": 370, "y": 420}, {"x": 370, "y": 400}]}
+		{"from": "ExtendShamt", "out": "Out", "to": "ID/EX", "in": "Shamt", "start": {"x": 340, "y": 420}, "end": {"x": 390, "y": 398}, "points": [{"x": 370, "y": 420}, {"x": 370, "y": 398}]},
+
+		{"from": "ID/EX", "out": "Shamt", "to": "MuxShamt", "in": "1", "start": {"x": 400, "y": 398}, "end": {"x": 520, "y": 350}, "points": [{"x": 512, "y": 398}, {"x": 512, "y": 350}] }
 	],
 	"reg_names": ["zero", "at", "v0", "v1", "a0", "a1", "a2", "a3", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra"],
 	"instructions": "pipeline_srl.set"
