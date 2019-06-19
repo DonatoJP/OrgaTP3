@@ -42,6 +42,9 @@
 	},
 	"control": {
 		"0": {"RegDst": 1, "RegWrite": 1, "ALUOp": 2, "ALUSrc": 0, "MemToReg": 0},
+
+		"1": {"RegDst": 1, "RegWrite": 1, "ALUOp": 2, "ALUSrc": 0, "MemToReg": 0, "SHAMTSrc" : 1},
+
 		"8": {"RegDst": 0, "RegWrite": 1, "ALUOp": 0, "ALUSrc": 1, "MemToReg": 0},
 		"2": {"Jump": 1},
 		"4": {"ALUOp": 1, "ALUSrc": 0, "Branch": 1},
@@ -55,6 +58,9 @@
 		"control": [
 			{"aluop": 0, "out": {"Operation": 2}},
 			{"aluop": 1, "out": {"Operation": 6}},
+
+			{"aluop": 2, "func": 0, "out": {"Operation": 13}},
+
 			{"aluop": 2, "func": 16, "out": {"Operation": 10}},
 			{"aluop": 2, "func": 18, "out": {"Operation": 11}},
 			{"aluop": 2, "func": 24, "out": {"Operation": 8}},
@@ -78,7 +84,8 @@
 			"9": "div",
 			"10": "mfhi",
 			"11": "mflo",
-			"12": "nor"
+			"12": "nor",
+			"13": "srl"
 		}
 	}
 }
