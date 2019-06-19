@@ -120,7 +120,6 @@
 		{"from": "ForkMEMR2", "out": "Out2", "to": "MuxFwdB", "in": "1"},
 		{"from": "ForkReg", "out": "Out1", "to": "MuxReg", "in": "0"},
 		{"from": "ForkReg", "out": "Out2", "to": "EX/MEM", "in": "ReadData2", "points": [{"x": 445, "y": 308}], "end": {"x": 550, "y": 308}},
-		{"from": "MuxReg", "out": "Out", "to": "ALU", "in": "In2", "end": {"x": 480, "y": 287}},
 		{"from": "ID/EX", "out": "ALUSrc", "to": "MuxReg", "in": "ALUSrc", "start": {"x": 405, "y": 155}, "points": [{"x": 462, "y": 155}]},
 		{"from": "ID/EX", "out": "Imm", "to": "DistImm", "in": "In", "start": {"x": 405, "y": 350}, "end": {"x": 448, "y": 350}},
 		{"from": "ALUControl", "out": "Operation", "to": "ALU", "in": "Operation", "points": [{"x": 510, "y": 350}]},
@@ -199,7 +198,8 @@
 		{"from": "DistInst", "out": "10-6", "to": "ExtendShamt", "in": "In", "start": {"x": 203, "y": 280}, "end": {"x": 300, "y": 420}, "points": [{"x": 203, "y": 420}]},
 		{"from": "ExtendShamt", "out": "Out", "to": "ID/EX", "in": "Shamt", "start": {"x": 340, "y": 420}, "end": {"x": 390, "y": 398}, "points": [{"x": 370, "y": 420}, {"x": 370, "y": 398}]},
 
-		{"from": "ID/EX", "out": "Shamt", "to": "MuxShamt", "in": "1", "start": {"x": 400, "y": 398}, "end": {"x": 520, "y": 350}, "points": [{"x": 512, "y": 398}, {"x": 512, "y": 350}] }
+		{"from": "ID/EX", "out": "Shamt", "to": "MuxShamt", "in": "1", "start": {"x": 400, "y": 398}, "end": {"x": 520, "y": 350}, "points": [{"x": 512, "y": 398}, {"x": 512, "y": 350}] },
+		{"from": "MuxReg", "out": "Out", "to": "MuxShamt", "in": "0", "start": {"x": 470, "y": 292}, "end": {"x": 520, "y": 325}, "points": [{"x": 472, "y": 292}, {"x": 472, "y": 325}]}
 	],
 	"reg_names": ["zero", "at", "v0", "v1", "a0", "a1", "a2", "a3", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra"],
 	"instructions": "pipeline_srl.set"
