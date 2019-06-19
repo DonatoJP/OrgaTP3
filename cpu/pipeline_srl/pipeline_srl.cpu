@@ -64,7 +64,8 @@
 
 
 
-        "ExtendShamt":   {"type": "ShiftLeft", "x": 300, "y": 400, "in": {"id": "In", "size": 5}, "out": {"id": "Out", "size": 32}, "amount": 0, "desc": {"default": "Para extender el shamt a 32 bit", "pt": "Os 2 bits menos significativos dos endereços das instruções são sempre 00 (os endereços são múltiplos de 4). Como tal, estes bits não são incluídos no valor imediato da instrução (offset).\nEste componente restaura esses bits deslocando o valor 2 bits para a esquerda (ou multiplicando por 4), no caso de ser uma instrução de branch."}}
+        "ExtendShamt":   {"type": "ShiftLeft", "x": 300, "y": 400, "in": {"id": "In", "size": 5}, "out": {"id": "Out", "size": 32}, "amount": 0, "desc": {"default": "Para extender el shamt a 32 bit", "pt": "Os 2 bits menos significativos dos endereços das instruções são sempre 00 (os endereços são múltiplos de 4). Como tal, estes bits não são incluídos no valor imediato da instrução (offset).\nEste componente restaura esses bits deslocando o valor 2 bits para a esquerda (ou multiplicando por 4), no caso de ser uma instrução de branch."}},
+        "MuxShamt":     {"type": "Multiplexer", "latency": 15, "x": 520, "y": 320, "size": 5, "sel": "RegDst", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the instruction's rt or rd field as the destination register (WriteReg).", "pt": "Selecciona o campo rt ou rd da instrução como registo de destino (WriteReg)."}}
     },
 	"wires": [
 		{"from": "PC", "out": "PC", "to": "ForkPC", "in": "In"},
