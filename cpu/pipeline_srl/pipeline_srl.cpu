@@ -23,7 +23,7 @@
 		"NotStall":   {"type": "Not", "x": 175, "y": 2, "in": "Stall", "out": "Write"},
 		"ForkWrite":  {"type": "Fork", "x": 190, "y": 50, "size": 1, "in": "In", "out": ["Out1", "Out2"]},
 		
-		"ID/EX":      {"type": "PipelineRegister", "x": 390, "y": 110, "regs": {"ReadData1": 32, "ReadData2": 32, "NewPC": 32, "Imm": 32, "Rs": 5, "Rt": 5, "Rd": 5, "RegDst": 1, "ALUOp": 2, "ALUSrc": 1, "Branch": 1, "MemRead": 1, "MemWrite": 1, "MemToReg": 1, "RegWrite": 1, "SHAMTSrc" : 1}, "desc": {"default": "Register that separates two pipeline stages.\nThe values that transition to the next stage are stored here temporarily.\nIf Flush is active, all values are set to zero, inserting a NOP instruction.", "pt": "Registo que separa duas etapas do pipeline.\nOs valores que transitam para a próxima etapa são armazenados aqui temporariamente.\nSe Flush estiver activo, todos os valores são colocados a zero, inserindo uma instrução NOP."}},
+		"ID/EX":      {"type": "PipelineRegister", "x": 390, "y": 110, "regs": {"ReadData1": 32, "ReadData2": 32, "NewPC": 32, "Imm": 32, "Rs": 5, "Rt": 5, "Rd": 5, "RegDst": 1, "ALUOp": 2, "ALUSrc": 1, "Branch": 1, "MemRead": 1, "MemWrite": 1, "MemToReg": 1, "RegWrite": 1, "SHAMTSrc" : 1, "Shamt": 32}, "desc": {"default": "Register that separates two pipeline stages.\nThe values that transition to the next stage are stored here temporarily.\nIf Flush is active, all values are set to zero, inserting a NOP instruction.", "pt": "Registo que separa duas etapas do pipeline.\nOs valores que transitam para a próxima etapa são armazenados aqui temporariamente.\nSe Flush estiver activo, todos os valores são colocados a zero, inserindo uma instrução NOP."}},
 		
 		"ForkReg":    {"type": "Fork", "x": 445, "y": 281, "size": 32, "in": "In", "out": ["Out1", "Out2"]},
 		"MuxFwdA":    {"type": "Multiplexer", "latency": 15, "x": 425, "y": 230, "size": 32, "sel": "ForwardA", "out": "Out", "in": ["0", "1", "2"], "desc": {"default": "Selects, in conjunction with the forwarding unit, if the value of the 1st register comes from the register bank or if it's forwarded from one of the next stages.", "pt": "Selecciona, em conjunto com a unidade de atalhos, se o valor do 1º registo vem do banco de registos ou se é encaminhado de uma das etapas seguintes."}},
@@ -195,7 +195,8 @@
 
 
 		{"from": "Control", "out": "SHAMTSrc", "to": "ID/EX", "in": "SHAMTSrc", "start": {"x": 290, "y": 120}, "end": {"x": 390, "y": 120}},
-		{"from": "DistInst", "out": "10-6", "to": "ExtendShamt", "in": "In", "start": {"x": 203, "y": 280}, "end": {"x": 300, "y": 420}, "points": [{"x": 203, "y": 420}]}
+		{"from": "DistInst", "out": "10-6", "to": "ExtendShamt", "in": "In", "start": {"x": 203, "y": 280}, "end": {"x": 300, "y": 420}, "points": [{"x": 203, "y": 420}]},
+		{"from": "ExtendShamt", "out": "Out", "to": "ID/EX", "in": "Shamt", "start": {"x": 340, "y": 420}, "end": {"x": 390, "y": 400}, "points": [{"x": 370, "y": 420}, {"x": 370, "y": 400}]}
 	],
 	"reg_names": ["zero", "at", "v0", "v1", "a0", "a1", "a2", "a3", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra"],
 	"instructions": "pipeline_srl.set"
