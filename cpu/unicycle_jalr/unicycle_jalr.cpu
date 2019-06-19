@@ -63,7 +63,6 @@
 		{"from": "ShiftJump", "out": "Out", "to": "ConcatJump", "in": "In2"},
 		{"from": "DistPC", "out": "31-0", "to": "ForkBranch", "in": "In", "start": {"x": 255, "y": 83}, "points": [{"x": 320, "y": 83}]},
 		{"from": "ConcatJump", "out": "Out", "to": "MuxJump", "in": "1"},
-		{"from": "MuxJump", "out": "Out", "to": "PC", "in": "NewPC", "points": [{"x": 600, "y": 35}, {"x": 600, "y": 10}, {"x": 30, "y": 10}, {"x": 30, "y": 265}]},
 		{"from": "Control", "out": "Jump", "to": "MuxJump", "in": "Jump", "start": {"x": 280, "y": 140}, "points": [{"x": 587, "y": 140}], "end": {"x": 587, "y": 53}},
 		{"from": "DistImm", "out": "5-0", "to": "ALUControl", "in": "func", "points": [{"x": 265, "y": 360}, {"x": 265, "y": 380}, {"x": 350, "y": 380}, {"x": 350, "y": 350}]},
 		{"from": "Control", "out": "ALUOp", "to": "ALUControl", "in": "ALUOp", "start": {"x": 280, "y": 180}, "points": [{"x": 380, "y": 180}]},
@@ -95,7 +94,10 @@
 		{"from": "MuxWriteJalr", "out": "Out", "to": "RegBank", "in": "WriteData", "end":{"x":250 , "y": 300} },
 		{"from": "PCAdder", "out": "PC+4", "to": "ForkPC+4", "in": "In"},
 		{"from": "ForkPC+4", "out": "Out1", "to": "DistPC", "in": "In"},
-		{"from": "ForkPC+4", "out": "Out2", "to": "MuxWriteJalr", "in": "1"}
+		{"from": "ForkPC+4", "out": "Out2", "to": "MuxWriteJalr", "in": "1"},
+
+        {"from": "MuxJump", "out": "Out", "to": "MuxPCJalr", "in": "0", "points": [{"x": 600, "y": 35}, {"x": 600, "y": 10}, {"x": 30, "y": 10}, {"x": 30, "y": 265}]},
+		{"from": "MuxPCJalr", "out": "Out", "to": "PC", "in": "NewPC"}
 	],
 	"reg_names": ["zero", "at", "v0", "v1", "a0", "a1", "a2", "a3", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra"],
 	"instructions": "unicycle_jalr.set"
