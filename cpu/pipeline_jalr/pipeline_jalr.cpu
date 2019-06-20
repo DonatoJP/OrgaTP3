@@ -55,7 +55,7 @@
 		"ForkBr3":    {"type": "Fork", "x": 185, "y": 62, "size": 1, "in": "In", "out": ["Out1", "Out2"]},
 		"OrFlush":    {"type": "Or", "x": 375, "y": 70, "in1": "Stall", "in2": "Branch", "out": "Flush"},
 		
-		"MEM/WB":     {"type": "PipelineRegister", "x": 680, "y": 110, "regs": {"Result": 32, "ReadData": 32, "RegBankDst": 5, "MemToReg": 1, "RegWrite": 1}, "desc": {"default": "Register that separates two pipeline stages.\nThe values that transition to the next stage are stored here temporarily.", "pt": "Registo que separa duas etapas do pipeline.\nOs valores que transitam para a próxima etapa são armazenados aqui temporariamente."}},
+		"MEM/WB":     {"type": "PipelineRegister", "x": 680, "y": 110, "regs": {"PC+4": 32,"Result": 32, "ReadData": 32, "RegBankDst": 5, "MemToReg": 1, "RegWrite": 1}, "desc": {"default": "Register that separates two pipeline stages.\nThe values that transition to the next stage are stored here temporarily.", "pt": "Registo que separa duas etapas do pipeline.\nOs valores que transitam para a próxima etapa são armazenados aqui temporariamente."}},
 		
 		"MuxMem":     {"type": "Multiplexer", "latency": 15, "x": 715, "y": 270, "size": 32, "sel": "MemToReg", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the result of the ALU or the value read from memory to write to the destination register (WriteData).", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
 		"ForkRegWR2": {"type": "Fork", "x": 710, "y": 125, "size": 1, "in": "In", "out": ["Out1", "Out2"]},
@@ -196,7 +196,8 @@
 
         {"from": "ID/EX", "out": "NewPC", "to": "ForkPC+4", "in": "In", "start": {"x": 405, "y": 175}},
         {"from": "ForkPC+4", "out": "Out1", "to": "AddBranch", "in": "In1", "start": {"x": 405, "y": 175}},
-        {"from": "ForkPC+4", "out": "Out2", "to": "EX/MEM", "in": "PC+4", "end": {"x": 550, "y": 160},"points": [{"x": 490, "y": 160}]}
+        {"from": "ForkPC+4", "out": "Out2", "to": "EX/MEM", "in": "PC+4", "end": {"x": 550, "y": 160},"points": [{"x": 490, "y": 160}]},
+        {"from": "EX/MEM", "out": "PC+4", "to": "MEM/WB", "in": "PC+4","start": {"x": 560, "y": 160} ,"end": {"x": 680, "y": 160}}
     ],
 	"reg_names": ["zero", "at", "v0", "v1", "a0", "a1", "a2", "a3", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra"],
 	"instructions": "pipeline_jalr.set"
