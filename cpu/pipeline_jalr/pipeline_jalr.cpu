@@ -23,7 +23,7 @@
 		"NotStall":   {"type": "Not", "x": 175, "y": 2, "in": "Stall", "out": "Write"},
 		"ForkWrite":  {"type": "Fork", "x": 190, "y": 50, "size": 1, "in": "In", "out": ["Out1", "Out2"]},
 		
-		"ID/EX":      {"type": "PipelineRegister", "x": 390, "y": 110, "regs": {"ReadData1": 32, "ReadData2": 32, "NewPC": 32, "Imm": 32, "Rs": 5, "Rt": 5, "Rd": 5, "RegDst": 1, "ALUOp": 2, "ALUSrc": 1, "Branch": 1, "MemRead": 1, "MemWrite": 1, "MemToReg": 1, "RegWrite": 1}, "desc": {"default": "Register that separates two pipeline stages.\nThe values that transition to the next stage are stored here temporarily.\nIf Flush is active, all values are set to zero, inserting a NOP instruction.", "pt": "Registo que separa duas etapas do pipeline.\nOs valores que transitam para a próxima etapa são armazenados aqui temporariamente.\nSe Flush estiver activo, todos os valores são colocados a zero, inserindo uma instrução NOP."}},
+		"ID/EX":      {"type": "PipelineRegister", "x": 390, "y": 110, "regs": {"ReadData1": 32, "ReadData2": 32, "NewPC": 32, "Imm": 32, "Rs": 5, "Rt": 5, "Rd": 5, "RegDst": 1, "ALUOp": 2, "ALUSrc": 1, "Branch": 1, "MemRead": 1, "MemWrite": 1, "MemToReg": 1, "RegWrite": 1, "Jalr": 1}, "desc": {"default": "Register that separates two pipeline stages.\nThe values that transition to the next stage are stored here temporarily.\nIf Flush is active, all values are set to zero, inserting a NOP instruction.", "pt": "Registo que separa duas etapas do pipeline.\nOs valores que transitam para a próxima etapa são armazenados aqui temporariamente.\nSe Flush estiver activo, todos os valores são colocados a zero, inserindo uma instrução NOP."}},
 		
 		"ForkReg":    {"type": "Fork", "x": 445, "y": 281, "size": 32, "in": "In", "out": ["Out1", "Out2"]},
 		"MuxFwdA":    {"type": "Multiplexer", "latency": 15, "x": 425, "y": 230, "size": 32, "sel": "ForwardA", "out": "Out", "in": ["0", "1", "2"], "desc": {"default": "Selects, in conjunction with the forwarding unit, if the value of the 1st register comes from the register bank or if it's forwarded from one of the next stages.", "pt": "Selecciona, em conjunto com a unidade de atalhos, se o valor do 1º registo vem do banco de registos ou se é encaminhado de uma das etapas seguintes."}},
@@ -41,7 +41,7 @@
 		"ForkRt2":    {"type": "Fork", "x": 408, "y": 381, "size": 5, "in": "In", "out": ["Out1", "Out2", "Out3"]},
 		"ForwardingUnit":{"type": "ForwardingUnit", "latency": 50, "x": 470, "y": 410, "ex_mem_reg_write": "EX/MEM.RegWrite", "mem_wb_reg_write": "MEM/WB.RegWrite", "ex_mem_rd": "EX/MEM.Rd", "mem_wb_rd": "MEM/WB.Rd", "id_ex_rs": "ID/EX.Rs", "id_ex_rt": "ID/EX.Rt", "fwd_a": "ForwardA", "fwd_b": "ForwardB"},
 		
-		"EX/MEM":     {"type": "PipelineRegister", "x": 550, "y": 110, "regs": {"Result": 32, "ReadData2": 32, "Zero": 1, "RegBankDst": 5, "Target": 32, "Branch": 1, "MemRead": 1, "MemWrite": 1, "MemToReg": 1, "RegWrite": 1, "PC+4": 32}, "desc": {"default": "Register that separates two pipeline stages.\nThe values that transition to the next stage are stored here temporarily.\nIf Flush is active, all values are set to zero, inserting a NOP instruction.", "pt": "Registo que separa duas etapas do pipeline.\nOs valores que transitam para a próxima etapa são armazenados aqui temporariamente.\nSe Flush estiver activo, todos os valores são colocados a zero, inserindo uma instrução NOP."}},
+		"EX/MEM":     {"type": "PipelineRegister", "x": 550, "y": 110, "regs": {"Jalr":1, "Result": 32, "ReadData2": 32, "Zero": 1, "RegBankDst": 5, "Target": 32, "Branch": 1, "MemRead": 1, "MemWrite": 1, "MemToReg": 1, "RegWrite": 1, "PC+4": 32}, "desc": {"default": "Register that separates two pipeline stages.\nThe values that transition to the next stage are stored here temporarily.\nIf Flush is active, all values are set to zero, inserting a NOP instruction.", "pt": "Registo que separa duas etapas do pipeline.\nOs valores que transitam para a próxima etapa são armazenados aqui temporariamente.\nSe Flush estiver activo, todos os valores são colocados a zero, inserindo uma instrução NOP."}},
 		
 		"ForkMem":    {"type": "Fork", "x": 575, "y": 275, "size": 32, "in": "In", "out": ["Out1", "Out2"]},
 		"ForkEXR1":   {"type": "Fork", "x": 575, "y": 360, "size": 32, "in": "In", "out": ["Out1", "Out2"]},
@@ -55,7 +55,7 @@
 		"ForkBr3":    {"type": "Fork", "x": 185, "y": 62, "size": 1, "in": "In", "out": ["Out1", "Out2"]},
 		"OrFlush":    {"type": "Or", "x": 375, "y": 70, "in1": "Stall", "in2": "Branch", "out": "Flush"},
 		
-		"MEM/WB":     {"type": "PipelineRegister", "x": 680, "y": 110, "regs": {"PC+4": 32,"Result": 32, "ReadData": 32, "RegBankDst": 5, "MemToReg": 1, "RegWrite": 1}, "desc": {"default": "Register that separates two pipeline stages.\nThe values that transition to the next stage are stored here temporarily.", "pt": "Registo que separa duas etapas do pipeline.\nOs valores que transitam para a próxima etapa são armazenados aqui temporariamente."}},
+		"MEM/WB":     {"type": "PipelineRegister", "x": 680, "y": 110, "regs": {"Jalr":1, "PC+4": 32,"Result": 32, "ReadData": 32, "RegBankDst": 5, "MemToReg": 1, "RegWrite": 1}, "desc": {"default": "Register that separates two pipeline stages.\nThe values that transition to the next stage are stored here temporarily.", "pt": "Registo que separa duas etapas do pipeline.\nOs valores que transitam para a próxima etapa são armazenados aqui temporariamente."}},
 		
 		"MuxMem":     {"type": "Multiplexer", "latency": 15, "x": 715, "y": 270, "size": 32, "sel": "MemToReg", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the result of the ALU or the value read from memory to write to the destination register (WriteData).", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
 		"ForkRegWR2": {"type": "Fork", "x": 710, "y": 125, "size": 1, "in": "In", "out": ["Out1", "Out2"]},
@@ -65,9 +65,10 @@
 
 
         "ForkPC+4":     {"type": "Fork", "x": 490, "y": 175, "size": 32, "in": "In", "out": ["Out1", "Out2"]},
-		"MuxJalr":     	{"type": "Multiplexer", "latency": 15, "x": 90, "y": 500, "size": 32, "sel": "MemToReg", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the result of the ALU or the value read from memory to write to the destination register (WriteData).", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
-		"MuxWriteJalr": {"type": "Multiplexer", "latency": 15, "x": 90, "y": 450, "size": 32, "sel": "MemToReg", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the result of the ALU or the value read from memory to write to the destination register (WriteData).", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
-		"ForkResult":  	{"type": "Fork", "x": 150, "y": 490, "size": 32, "in": "In", "out": ["Out1", "Out2"]}
+		"MuxJalr":     	{"type": "Multiplexer", "latency": 15, "x": 90, "y": 500, "size": 32, "sel": "Sel", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the result of the ALU or the value read from memory to write to the destination register (WriteData).", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
+		"MuxWriteJalr": {"type": "Multiplexer", "latency": 15, "x": 90, "y": 450, "size": 32, "sel": "Sel", "in": ["0", "1"], "out": "Out", "desc": {"default": "Selects the result of the ALU or the value read from memory to write to the destination register (WriteData).", "pt": "Selecciona o resultado da ALU ou o valor lido da memória para escrever no registo de destino (WriteData)."}},
+		"ForkResult":  	{"type": "Fork", "x": 150, "y": 490, "size": 32, "in": "In", "out": ["Out1", "Out2"]},
+		"ForkJalr":  	{"type": "Fork", "x": 150, "y": 450, "size": 1, "in": "In", "out": ["Out1", "Out2"]}
 	},
 	"wires": [
 		{"from": "PC", "out": "PC", "to": "ForkPC", "in": "In"},
@@ -208,7 +209,15 @@
 		{"from": "ForkResult", "out": "Out2", "to": "MuxWriteJalr", "in": "0"},
 		{"from": "MuxWriteJalr", "out": "Out", "to": "RegBank", "in": "WriteData"},
 		{"from": "MuxPC", "out": "Out", "to": "MuxJalr", "in": "0"},
-		{"from": "MuxJalr", "out": "Out", "to": "PC", "in": "NewPC"}
+		{"from": "MuxJalr", "out": "Out", "to": "PC", "in": "NewPC"},
+
+		{"from": "Control", "out": "Jalr", "to": "ID/EX", "in": "Jalr"},
+		{"from": "ID/EX", "out": "Jalr", "to": "EX/MEM", "in": "Jalr"},
+		{"from": "EX/MEM", "out": "Jalr", "to": "MEM/WB", "in": "Jalr"},
+		{"from": "MEM/WB", "out": "Jalr", "to": "ForkJalr", "in": "In"},
+
+		{"from": "ForkJalr", "out": "Out1", "to": "MuxWriteJalr", "in": "Sel"},
+		{"from": "ForkJalr", "out": "Out2", "to": "MuxJalr", "in": "Sel"}
 	],
 	"reg_names": ["zero", "at", "v0", "v1", "a0", "a1", "a2", "a3", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra"],
 	"instructions": "pipeline_jalr.set"
